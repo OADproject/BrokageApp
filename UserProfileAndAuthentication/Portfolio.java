@@ -1,7 +1,6 @@
 import java.util.*;
 public class Portfolio
 {
-    private int ID;
     private double moneyBalance;
     private List<Stock> stocks = new ArrayList<Stock>();
     private List<TransactionHistory> transactionHistory = new ArrayList<TransactionHistory>();
@@ -27,20 +26,10 @@ public class Portfolio
         }
         return flag;
     }
-  
-    public boolean setID(int i)
-    {
-        ID= i;
-        return true;
-    }
     public boolean setMoneyBalance(double money)
     {
         moneyBalance = money;
         return true;
-    }
-    public int getID()
-    {
-        return ID;
     }
     public List<Stock> getStocks()
     {
@@ -50,9 +39,9 @@ public class Portfolio
     {
         return moneyBalance;
     }
-    public boolean addTransaction(int userID, String stockName,double stockUnitPrice,int stockQuantity,boolean buyOrSell)
+    public boolean addTransaction(String stockName,double stockUnitPrice,int stockQuantity,boolean buyOrSell)
     {
-        TransactionHistory t = new TransactionHistory(userID,stockName,stockUnitPrice,stockQuantity,buyOrSell);
+        TransactionHistory t = new TransactionHistory(stockName,stockUnitPrice,stockQuantity,buyOrSell);
         transactionHistory.add(t);
         return true;
     }

@@ -1,11 +1,31 @@
 public class User
 {
     private int ID;
+    private static int userCount = 0;
     private String name;
     private String SSN;
     private String address;
+    private String phoneNumber;
     private Portfolio p = new Portfolio();
     private Authentication a = new Authentication();
+    
+    User()
+    {
+        ID = userCount++;
+    }
+    
+    User(String realName,String socialSecurity,String addr,String phnum,Portfolio port,Authentication auth)
+    {
+        ID = userCount++;
+        name = realName;
+        SSN = socialSecurity;
+        address = addr;
+        phoneNumber = phnum;
+        p = port;
+        a = auth;
+    }
+        
+        
     
     public int getID()
     {
@@ -22,6 +42,10 @@ public class User
     public String getAddress()
     {
         return address;
+    }
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
     }
     public Portfolio getPortfolio()
     {
@@ -49,6 +73,11 @@ public class User
     public boolean setAddress(String a)
     {
         address =a;
+        return true;
+    }
+    public boolean setPhoneNumber(String ph)
+    {
+        phoneNumber = ph;
         return true;
     }
     public boolean setAuth(String usn,String pwd)
