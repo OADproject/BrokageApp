@@ -3,14 +3,14 @@ import java.text.*;
 public class TransactionHistory
 {
     String timeStamp;
-    String userID;
+    int userID;
     String stockName;
     double stockUnitPrice;
     int stockQuantity;
     boolean buyOrSell; //buy= true, sell = false;
     
     
-    TransactionHistory(String user_id,String stock_name,double stock_unit_price,int stock_quantity,boolean buy_sell)
+    TransactionHistory(int user_id,String stock_name,double stock_unit_price,int stock_quantity,boolean buy_sell)
     {
         timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
         userID = user_id;
@@ -24,7 +24,7 @@ public class TransactionHistory
     {
         return timeStamp;
     }
-    public String getUserID()
+    public int getUserID()
     {
         return userID;
     }
@@ -40,7 +40,7 @@ public class TransactionHistory
     {
         return stockQuantity;
     }
-    public boolean setUserID(String us)
+    public boolean setUserID(int us)
     {
         userID = us;
         return true;

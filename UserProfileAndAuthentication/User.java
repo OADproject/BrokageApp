@@ -1,13 +1,13 @@
 public class User
 {
-    private String ID;
+    private int ID;
     private String name;
     private String SSN;
     private String address;
     private Portfolio p = new Portfolio();
     private Authentication a = new Authentication();
     
-    public String getID()
+    public int getID()
     {
         return ID;
     }
@@ -31,7 +31,7 @@ public class User
     {
         return a;
     }
-    public boolean setID(String i)
+    public boolean setID(int i)
     {
         ID = i;
         return true;
