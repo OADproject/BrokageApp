@@ -61,7 +61,11 @@ public class Market
         sellRequest.add(s);
         return true;
     }
-    
+    /**
+     * Update Variance Factor
+     * Update Portfolios
+     * Update Transaction History
+     */
     
     
 }
