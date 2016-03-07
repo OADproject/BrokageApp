@@ -1,8 +1,10 @@
 import java.util.*;
 public class Market
 {
-    private List<Stock> market = new ArrayList<Stock>();
-    private boolean marketState;
+   private List<Stock> globalStocks = new ArrayList<Stock>();
+   private List<BuySell> buyRequest = new ArrayList<BuySell>();
+   private List<BuySell> sellRequest = new ArrayList<BuySell>();
+   private boolean marketState;
     
     Market()
     {
@@ -22,19 +24,19 @@ public class Market
     public boolean addStock(String name, double price,int qty)
     {
         Stock s = new Stock(name,price,qty);
-        market.add(s);
+        globalStocks.add(s);
         return true;
     }
     public boolean deleteStock(String name)
     {
-        int len = market.size();
+        int len = globalStocks.size();
         boolean flag = false;
-        for(Stock i : market)
+        for(Stock i : globalStocks)
         {
             String test = i.getName();
             if(test.equals(name))
             {
-                market.remove(i);
+                globalStocks.remove(i);
                 flag=true;
                 break;
             }
@@ -43,11 +45,23 @@ public class Market
     }
     public List<Stock> getMarket()
     {
-        return market;
+        return globalStocks;
     }
     public boolean getMarketState()
     {
         return marketState;
     }
+    public boolean addBuyRequest(BuySell b)
+    {
+        buyRequest.add(b);
+        return true;
+    }
+    public boolean addSellRequest(BuySell s)
+    {
+        sellRequest.add(s);
+        return true;
+    }
+    
+    
     
 }
