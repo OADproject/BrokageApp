@@ -33,7 +33,7 @@ public class Market
         boolean flag = false;
         for(Stock i : globalStocks)
         {
-            String test = i.getName();
+            String test = i.getStockName();
             if(test.equals(name))
             {
                 globalStocks.remove(i);

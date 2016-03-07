@@ -16,7 +16,7 @@ public class Portfolio
         boolean flag = false;
         for(Stock i : stocks)
         {
-            String test = i.getName();
+            String test = i.getStockName();
             if(test.equals(name))
             {
                 stocks.remove(i);

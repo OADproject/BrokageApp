@@ -32,7 +32,7 @@ public class Stock
         stockQty = qty;
         return true;
     }
-    public String getName()
+    public String getStockName()
     {
         return stockName;
     }

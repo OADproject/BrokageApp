@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.text.*;
 public class Logger
 {
     
@@ -20,6 +19,27 @@ public class Logger
         }
         for(User i: userList)
         {
+            FileWriter fw = new FileWriter("USR"+i.getID()+".csv",true);
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+            String data = sdf.format(d)+","+i.getPortfolio().getMoneyBalance()+",";
+            fw.write(data);
+            int x=0;
+            for(Stock s: i.getPortfolio().getStocks())
+            {
+                String data2;
+                if(x==0)
+                {
+                    data2 = s.getStockName()+","+s.getStockQty()+"\n";
+                }
+                else
+                {
+                    data2 = " , ,"+s.getStockName()+","+s.getStockQty()+"\n";
+                }
+                fw.write(data2);
+                x++;
+            }
+            
         }
     }
     public void updateMarketLogs(Market market)
@@ -45,6 +65,8 @@ public class Logger
             FileWriter fw = new FileWriter("USR"+i.getID()+".csv",true);
             String header = "UserName:,"+i.getAuth().getUsername()+"\n"+"Name:,"+i.getName()+"\n"+"SSN:,"+i.getSSN()+"\n"+"Address:,"+i.getAddress()+"\n"+"Phone:,"+i.getPhoneNumber()+"\n\n";
             fw.write(header);
+            String header2 = "Time,Balance,Stock Name,Stock Units\n";
+            fw.write(header2);
         }
     }
 }
