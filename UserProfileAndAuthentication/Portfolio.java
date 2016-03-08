@@ -1,3 +1,5 @@
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.*;
 public class Portfolio
 {
@@ -50,5 +52,9 @@ public class Portfolio
         return transactionHistory;
     }
     
-   
+    public boolean updatePortfolio(BuySell order){
+
+        // TODO write code for updating
+        return true;
+    }
 }
