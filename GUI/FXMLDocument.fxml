@@ -56,21 +56,21 @@
                            <children>
                               <Label layoutX="52.0" layoutY="56.0" text="Enter Username:" />
                               <TextField id="userSearchField" fx:id="usernameSearchField" layoutX="155.0" layoutY="52.0" />
-                              <TextArea id="userInfoTextArea" layoutX="52.0" layoutY="112.0" prefHeight="377.0" prefWidth="256.0" />
+                              <TextArea id="userInfoTextArea" fx:id="userInfoTextArea" layoutX="52.0" layoutY="112.0" prefHeight="377.0" prefWidth="256.0" />
                               <Label layoutX="52.0" layoutY="95.0" text="User Info:" />
                               <Button layoutX="339.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
-                              <Button id="editUsedInoBtn" layoutX="587.0" layoutY="246.0" mnemonicParsing="false" onAction="#editUsedInfo" text="Edit User Information" />
+                              <Button id="editUsedInoBtn" layoutX="590.0" layoutY="246.0" mnemonicParsing="false" onAction="#editUsedInfo" text="Edit User Information" />
                               <Button id="viewUSerStock" layoutX="339.0" layoutY="112.0" mnemonicParsing="false" onAction="#viewUserStocks" text="View User Info" />
                               <Label layoutX="508.0" layoutY="116.0" text="Username:" />
                               <Label layoutX="509.0" layoutY="139.0" text="Password:" />
                               <Label layoutX="508.0" layoutY="164.0" text="Balance:" />
                               <Label layoutX="508.0" layoutY="186.0" text="Stock Name:" />
                               <Label layoutX="508.0" layoutY="209.0" text="Stock Qty:" />
-                              <TextField id="editUserField" layoutX="588.0" layoutY="112.0" />
-                              <TextField id="editPasswordField" layoutX="588.0" layoutY="135.0" />
-                              <TextField id="editBalanceField" layoutX="588.0" layoutY="160.0" />
-                              <TextField id="stockQtyField" layoutX="589.0" layoutY="210.0" />
-                              <TextField id="stockField" layoutX="589.0" layoutY="185.0" />
+                              <TextField id="editUserField" fx:id="usernameEdit" layoutX="588.0" layoutY="112.0" />
+                              <TextField id="editPasswordField" fx:id="passwordEdit" layoutX="588.0" layoutY="135.0" />
+                              <TextField id="editBalanceField" fx:id="balanceEdit" layoutX="588.0" layoutY="160.0" />
+                              <TextField id="stockQtyField" fx:id="stockQtyEdit" layoutX="589.0" layoutY="210.0" />
+                              <TextField id="stockField" fx:id="stockNameEdit" layoutX="589.0" layoutY="185.0" />
                            </children>
                         </Pane>
                      </children>
