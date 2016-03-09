@@ -1,3 +1,5 @@
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 import java.util.*;
 import java.util.concurrent.ThreadFactory;
 
@@ -43,7 +45,7 @@ public class Market extends Thread {
     private void addDummyCurrentValues() {
         for (StockType s : StockType.values()
                 ) {
-            currentStockValues.put(s.toString().toLowerCase(), (double) 100);
+            currentStockValues.put(s.toString().toLowerCase(),  100.00);
         }
     }
 
@@ -82,6 +84,7 @@ public class Market extends Thread {
         return marketState;
     }
 
+
     public boolean stopMarket() {
         marketState = false;
         return marketState;
@@ -90,6 +93,7 @@ public class Market extends Thread {
     synchronized public boolean addStock(String name, double price, int qty) {
         Stock s = new Stock(name, price, qty);
         globalStocks.add(s);
+        currentStockValues.put(name,price);
         return true;
     }
 
@@ -243,5 +247,24 @@ public class Market extends Thread {
 //        m.matchOrders();
 //        m.updateStockValues();
 //        m.evaluateCurrentMarketValue();
+    }
+
+    public User returnUser(Authentication authentication){
+        List<User> users = getUserList();
+        for (User u: users) {
+            if(u.getAuth() == authentication){
+                return u;
+            }
+        }
+        double balance = 88888;
+        List<Stock> stocks = new ArrayList<>();
+        stocks.add(new Stock(StockType.AMAZON.toString().toLowerCase(),100,100));
+        stocks.add(new Stock(StockType.GOOGLE.toString().toLowerCase(),100,100));
+        stocks.add(new Stock(StockType.FACEBOOK.toString().toLowerCase(),100,100));
+        List<TransactionHistory> histories = new ArrayList<>();
+        Portfolio p = new Portfolio(balance,stocks,histories);
+        User nu = new User(" "," "," "," ",p,authentication);
+
+        return nu;
     }
 }
