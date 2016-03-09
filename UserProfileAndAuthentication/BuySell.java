@@ -1,4 +1,5 @@
-public class BuySell {
+import java.util.*;
+public class BuySell implements Cloneable {
     private String stockName;
     private int userId;
     private String userName;
