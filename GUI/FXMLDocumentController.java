@@ -60,6 +60,13 @@ public class FXMLDocumentController implements Initializable {
     private TextField stockNameEdit;
     @FXML
     private TextField stockQtyEdit;
+    @FXML
+    private TextArea currentStockTextArea;
+    @FXML
+    private TextField stockNameField;
+    @FXML
+    private TextField stockPriceField;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -155,6 +162,17 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void viewCurrentStocks(ActionEvent actionEvent) {
+        Market m =  Market.getMarket();
+        StringBuilder sb = new StringBuilder();
+        Map<String,Double> vals =  m.getCurrentStockValues();
+        for (String s: vals.keySet()
+             ) {
+            sb.append(s);
+            sb.append(" : ");
+            sb.append(vals.get(s));
+            sb.append("\n");
+        }
+        currentStockTextArea.setText(sb.toString());
     }
     public void updateMarket(ActionEvent actionEvent) {
 //        currentMarketStockPricesArea.setText("Market Started");
@@ -181,6 +199,37 @@ public class FXMLDocumentController implements Initializable {
 
     public void stopMarket(ActionEvent actionEvent) {
         currentMarketStockPricesArea.setText("Market Stopped");
+    }
+    
+    public void addNewStock(ActionEvent actionEvent)
+    {
+        String stkname = stockNameField.getText();
+        double stkprice = Double.parseDouble(stockPriceField.getText());
+        
+        Market m = Market.getMarket();
+        m.addStock(stkname, stkprice, 0);
+    }
+    
+    public void editStock(ActionEvent actionEvent)
+    {
+        String stkname = stockNameField.getText();
+        double stkprice = Double.parseDouble(stockPriceField.getText());
+        
+        Market m = Market.getMarket();
+        Map<String,Double> stocks = m.getCurrentStockValues();
+        List<Stock> global = m.getMarketStocks();
+        stocks.put(stkname,stkprice);
+        Stock s = null;
+        for(Stock i: global)
+        {
+            if(i.getStockName().equals(stkname))
+            {
+                s=i;
+                break;
+            }
+        }
+        s.setStockUnitPrice(stkprice);
+        
     }
 }
 

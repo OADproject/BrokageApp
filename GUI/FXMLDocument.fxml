@@ -87,32 +87,16 @@
                               <Button fx:id="viewCurentStockButton" layoutX="57.0" layoutY="259.0" mnemonicParsing="false" onAction="#viewCurrentStocks" text="View Current Stocks" />
                               <Label layoutX="57.0" layoutY="345.0" text="Stock Name:" />
                               <Label layoutX="57.0" layoutY="369.0" text="Stock Price:" />
-                              <Label layoutX="57.0" layoutY="392.0" text="Stock Qty:" />
                               <TextField fx:id="stockNameField" layoutX="137.0" layoutY="341.0" />
                               <TextField fx:id="stockPriceFiled" layoutX="137.0" layoutY="365.0" />
-                              <TextField fx:id="stockQtyFiled" layoutX="137.0" layoutY="388.0" />
-                              <Button fx:id="addStockButton" layoutX="137.0" layoutY="425.0" mnemonicParsing="false" text="Add Stock" />
-                              <Line endX="100.0" layoutX="397.0" layoutY="398.0" rotate="90.0" startX="-100.0" />
+                              <Button fx:id="addStockButton" layoutX="137.0" layoutY="425.0" mnemonicParsing="false" onAction="#addNewStock" text="Add New Stock" />
                               <Label layoutX="57.0" layoutY="298.0" text="Add New Stock-:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="431.0" layoutY="298.0" text="Edit Existing Stock -:">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="431.0" layoutY="345.0" text="Choose Stock:" />
-                              <Label layoutX="432.0" layoutY="369.0" text="Stock Name:" />
-                              <Label layoutX="432.0" layoutY="392.0" text="Stock Price:" />
-                              <Label layoutX="432.0" layoutY="417.0" text="Stock Qty:" />
-                              <TextField fx:id="editStockName" layoutX="515.0" layoutY="365.0" />
-                              <TextField fx:id="editStockPrice" layoutX="515.0" layoutY="388.0" />
-                              <TextField fx:id="editStockQty" layoutX="515.0" layoutY="413.0" />
-                              <Button fx:id="editCommitChanges" layoutX="514.0" layoutY="450.0" mnemonicParsing="false" text="Commit Changes" />
+                              <Button fx:id="editCommitChanges" layoutX="242.0" layoutY="425.0" mnemonicParsing="false" onAction="#editStock" text="Edit Existing Stock" />
                               <Label layoutX="57.0" layoutY="39.0" text="Current Stock Info:" />
-                              <TextField fx:id="editStockField" layoutX="524.0" layoutY="340.0" />
                            </children>
                         </Pane>
                      </children>
