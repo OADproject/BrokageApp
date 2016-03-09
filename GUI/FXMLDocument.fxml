@@ -55,13 +55,12 @@
                         <Pane prefHeight="542.0" prefWidth="806.0">
                            <children>
                               <Label layoutX="52.0" layoutY="56.0" text="Enter Username:" />
-                              <TextField id="userSearchField" layoutX="155.0" layoutY="52.0" />
+                              <TextField id="userSearchField" fx:id="usernameSearchField" layoutX="155.0" layoutY="52.0" />
                               <TextArea id="userInfoTextArea" layoutX="52.0" layoutY="112.0" prefHeight="377.0" prefWidth="256.0" />
                               <Label layoutX="52.0" layoutY="95.0" text="User Info:" />
                               <Button layoutX="339.0" layoutY="464.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
                               <Button id="editUsedInoBtn" layoutX="587.0" layoutY="246.0" mnemonicParsing="false" onAction="#editUsedInfo" text="Edit User Information" />
-                              <Button id="viewUSerStock" layoutX="339.0" layoutY="147.0" mnemonicParsing="false" onAction="#viewUserStocks" text="View User Stock" />
-                              <Button id="viewUserButton" layoutX="339.0" layoutY="112.0" mnemonicParsing="false" onAction="#viewUserBalance" text="View User Balance" />
+                              <Button id="viewUSerStock" layoutX="339.0" layoutY="112.0" mnemonicParsing="false" onAction="#viewUserStocks" text="View User Info" />
                               <Label layoutX="508.0" layoutY="116.0" text="Username:" />
                               <Label layoutX="509.0" layoutY="139.0" text="Password:" />
                               <Label layoutX="508.0" layoutY="164.0" text="Balance:" />
@@ -70,7 +69,7 @@
                               <TextField id="editUserField" layoutX="588.0" layoutY="112.0" />
                               <TextField id="editPasswordField" layoutX="588.0" layoutY="135.0" />
                               <TextField id="editBalanceField" layoutX="588.0" layoutY="160.0" />
-                              <TextField id="stockQtyField" layoutX="587.0" layoutY="210.0" />
+                              <TextField id="stockQtyField" layoutX="589.0" layoutY="210.0" />
                               <TextField id="stockField" layoutX="589.0" layoutY="185.0" />
                            </children>
                         </Pane>
@@ -113,7 +112,7 @@
                               <TextField id="editStockQty" layoutX="515.0" layoutY="413.0" />
                               <Button id="editCommitChanges" layoutX="514.0" layoutY="450.0" mnemonicParsing="false" text="Commit Changes" />
                               <Label layoutX="57.0" layoutY="39.0" text="Current Stock Info:" />
-                              <TextField id="editStockField" layoutX="524.0" layoutY="340.0" />
+                              <TextField id="editStockField" layoutX="515.0" layoutY="341.0" />
                            </children>
                         </Pane>
                      </children>
