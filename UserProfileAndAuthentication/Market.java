@@ -6,11 +6,11 @@ public class Market extends Thread {
 
     private static Market marketInstance = null;
     private List<Stock> globalStocks = new ArrayList<Stock>();
-    private static final List<BuySell> buyRequest = Collections.synchronizedList(new ArrayList<>());
-    private static final List<BuySell> sellRequest = Collections.synchronizedList(new ArrayList<>());
+    private static final List<BuySell> buyRequest = Collections.synchronizedList(new ArrayList<BuySell>());
+    private static final List<BuySell> sellRequest = Collections.synchronizedList(new ArrayList<BuySell>());
     private static final Hashtable<Integer, User> allUsersTable = new Hashtable<>();
-//    private static final List<BuySell> buyRequest = new ArrayList<>();
-//    private static final ArrayList<BuySell> sellRequest = new ArrayList<BuySell>();
+    //private static final List<User> allUsers = Collections.synchronizedList(new ArrayList<User>());
+
 
     private boolean marketState;
 
@@ -113,6 +113,10 @@ public class Market extends Thread {
 
     public boolean getMarketState() {
         return marketState;
+    }
+    public List<User> getUserList()
+    {
+        return (List<User>)allUsersTable.values();
     }
 
     synchronized public boolean addBuyRequest(BuySell b) {
