@@ -47,10 +47,21 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TextArea userInfoTextArea;
+    @FXML
+    private TextField usernameEdit;
+    @FXML
+    private TextField passwordEdit;
+    @FXML
+    private TextField balanceEdit;
+    @FXML
+    private TextField stockNameEdit;
+    @FXML
+    private TextField stockQtyEdit;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    
 
     public void validateLogin(ActionEvent actionEvent) {
         LoginError.setText("");
@@ -66,6 +77,49 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void editUsedInfo(ActionEvent actionEvent) {
+        String usn = usernameEdit.getText();
+        String pwd = passwordEdit.getText();
+        double balance = Double.parseDouble(balanceEdit.getText());
+        String stkname = stockNameEdit.getText();
+        int stkqty = Integer.parseInt(stockQtyEdit.getText());
+        
+        Market m = Market.getMarket();
+        List<User> userList = m.getUserList();
+        User dispUser = null;
+        for(User u: userList)
+        {
+            Authentication a = u.getAuth();
+            if(a.getUsername().equals(usn))
+            {
+                dispUser = u;
+                break;
+            }
+        }
+        
+        if(usn.equals("") == false)
+            dispUser.getAuth().setUsername(usn);
+        if(pwd.equals("") == false)
+            dispUser.getAuth().setPassword(pwd);
+        if(balanceEdit.getText().equals("") == false)
+            dispUser.getPortfolio().setMoneyBalance(balance);
+        if(stockNameEdit.getText().equals("")==false)
+        {
+            List<Stock> userStocks = dispUser.getPortfolio().getStocks();
+            Stock temp = null;
+            for(Stock s: userStocks)
+            {
+             if(s.getStockName().equals(stkname))
+             {
+                 temp = s;
+                 break;
+             }
+            }
+            temp.setStockName(stkname);
+            if(stockQtyEdit.getText().equals("")==false)
+            {
+                temp.setStockQty(stkqty);
+            }
+        }
     }
 
     public void viewUserStocks(ActionEvent actionEvent) {

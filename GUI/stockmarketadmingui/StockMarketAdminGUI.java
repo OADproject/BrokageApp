@@ -24,7 +24,6 @@ public class StockMarketAdminGUI extends Application {
         
         stage.setScene(scene);
         stage.setTitle("Stock Market Admin Control Panel");
-        //stage.setOnCloseRequest(e -> System.exit(0));
         stage.show();
     }
 
