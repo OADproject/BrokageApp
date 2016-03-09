@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stockmarketadmingui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +31,7 @@ public class StockMarketAdminGUI extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         launch(args);
     }
     
