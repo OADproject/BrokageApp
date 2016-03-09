@@ -5,18 +5,15 @@
  */
 
 import java.net.URL;
-import java.util.*;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 /**
  *
@@ -41,27 +38,15 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private Label LoginError;
-    
-    @FXML
-    private TextField usernameSearchField;
 
     @FXML
-    private TextArea userInfoTextArea;
-    @FXML
-    private TextField usernameEdit;
-    @FXML
-    private TextField passwordEdit;
-    @FXML
-    private TextField balanceEdit;
-    @FXML
-    private TextField stockNameEdit;
-    @FXML
-    private TextField stockQtyEdit;
+
+    private TextArea currentMarketStockPricesArea;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
 
     public void validateLogin(ActionEvent actionEvent) {
         LoginError.setText("");
@@ -77,80 +62,41 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void editUsedInfo(ActionEvent actionEvent) {
-        String usn = usernameEdit.getText();
-        String pwd = passwordEdit.getText();
-        double balance = Double.parseDouble(balanceEdit.getText());
-        String stkname = stockNameEdit.getText();
-        int stkqty = Integer.parseInt(stockQtyEdit.getText());
-        
-        Market m = Market.getMarket();
-        List<User> userList = m.getUserList();
-        User dispUser = null;
-        for(User u: userList)
-        {
-            Authentication a = u.getAuth();
-            if(a.getUsername().equals(usn))
-            {
-                dispUser = u;
-                break;
-            }
-        }
-        
-        if(usn.equals("") == false)
-            dispUser.getAuth().setUsername(usn);
-        if(pwd.equals("") == false)
-            dispUser.getAuth().setPassword(pwd);
-        if(balanceEdit.getText().equals("") == false)
-            dispUser.getPortfolio().setMoneyBalance(balance);
-        if(stockNameEdit.getText().equals("")==false)
-        {
-            List<Stock> userStocks = dispUser.getPortfolio().getStocks();
-            Stock temp = null;
-            for(Stock s: userStocks)
-            {
-             if(s.getStockName().equals(stkname))
-             {
-                 temp = s;
-                 break;
-             }
-            }
-            temp.setStockName(stkname);
-            if(stockQtyEdit.getText().equals("")==false)
-            {
-                temp.setStockQty(stkqty);
-            }
-        }
     }
 
     public void viewUserStocks(ActionEvent actionEvent) {
-        String usn = usernameSearchField.getText();
-        Market m = Market.getMarket();
-        List<User> userList = m.getUserList();
-        User dispUser = null;
-        for(User u: userList)
-        {
-            Authentication a = u.getAuth();
-            if(a.getUsername().equals(usn))
-            {
-                dispUser = u;
-                break;
-            }
-        }
-        String output = "Name: "+dispUser.getName()+"\n"+"Phone: "+dispUser.getPhoneNumber()+"\n"+"Address: "+dispUser.getAddress()+"\n"+"Money Balance: "+dispUser.getPortfolio().getMoneyBalance()+"\n";
-        String output2 = "=================\n";
-        String pfolio = "Stocks Owned - >\n";
-        List<Stock> userStocks = dispUser.getPortfolio().getStocks();
-        String st="";
-        for(Stock s: userStocks)
-        {
-            st = st.concat("Stock Name: "+s.getStockName()+"\nStock Qty: "+s.getStockQty()+"\n\n");
-        }
-        userInfoTextArea.setText(output+output2+pfolio+st);
     }
 
     public void viewUserBalance(ActionEvent actionEvent) {
     }
 
     public void viewCurrentStocks(ActionEvent actionEvent) {
+    }
+
+    public void updateMarket(ActionEvent actionEvent) {
+//        currentMarketStockPricesArea.setText("Market Started");
+        Market m =  Market.getMarket();
+        StringBuilder sb = new StringBuilder();
+        Map<String,Double> vals =  m.getCurrentStockValues();
+        for (String s: vals.keySet()
+             ) {
+            sb.append(s);
+            sb.append(" : ");
+            sb.append(vals.get(s));
+            sb.append("\n");
+        }
+        currentMarketStockPricesArea.setText(sb.toString());
+    }
+
+    public void startMarket(ActionEvent actionEvent) {
+        Market m = Market.getMarket();
+        System.out.println("marketStarted");
+        updateMarket(new ActionEvent());
+
+
+    }
+
+    public void stopMarket(ActionEvent actionEvent) {
+        currentMarketStockPricesArea.setText("Market Stopped");
     }
 }
