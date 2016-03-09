@@ -6,11 +6,11 @@ public class Market extends Thread {
 
     private static Market marketInstance = null;
     private List<Stock> globalStocks = new ArrayList<Stock>();
-    private static final List<BuySell> buyRequest = Collections.synchronizedList(new ArrayList<>());
-    private static final List<BuySell> sellRequest = Collections.synchronizedList(new ArrayList<>());
+    private static final List<BuySell> buyRequest = Collections.synchronizedList(new ArrayList<BuySell>());
+    private static final List<BuySell> sellRequest = Collections.synchronizedList(new ArrayList<BuySell>());
     private static final Hashtable<Integer, User> allUsersTable = new Hashtable<>();
-//    private static final List<BuySell> buyRequest = new ArrayList<>();
-//    private static final ArrayList<BuySell> sellRequest = new ArrayList<BuySell>();
+    //private static final List<User> allUsers = Collections.synchronizedList(new ArrayList<User>());
+
 
     private boolean marketState;
 
@@ -114,6 +114,10 @@ public class Market extends Thread {
     public boolean getMarketState() {
         return marketState;
     }
+    public List<User> getUserList()
+    {
+        return (List<User>)allUsersTable.values();
+    }
 
     synchronized public boolean addBuyRequest(BuySell b) {
         buyRequest.add(b);
@@ -163,7 +167,7 @@ public class Market extends Thread {
             double newStockVal = calculateNewVal(currentStockValues.get(s), buySellDiff);
             currentStockValues.put(s, newStockVal);
             if (s.equals("amazon")){
-                System.out.println(s + " " + newStockVal);
+                System.out.println("Global Stocks: "+ s + " " + newStockVal);
             }
 
         }
@@ -188,14 +192,20 @@ public class Market extends Thread {
 
     private boolean matchOrders() {
         boolean atLeastOneMatch = false;
-        for (BuySell b : buyRequest) {
-            for (BuySell s : sellRequest) {
-                if (b.getStockName().equals(s.getStockName())) {
-                    if (b.getQuantity() == s.getQuantity()) {
-                        buyRequest.remove(b);
-                        sellRequest.remove(s);
+        Iterator<BuySell> i = buyRequest.iterator();
+        Iterator<BuySell> j = sellRequest.iterator();
+        while(i.hasNext()) {
+            BuySell temp1 = i.next();
+            while(j.hasNext()) {
+                BuySell temp2 = j.next();
+                if (temp1.getStockName().equals(temp2.getStockName())) {
+
+                    if (temp1.getQuantity() == temp2.getQuantity()) {
+                        System.out.println("found match" + temp1.getStockName());
+                        i.remove();
+                        j.remove();
 //                        updatePortfolio(b, s);
-                        System.out.println("found match" + b.getStockName());
+                        
                         atLeastOneMatch = true;
                     }
                 }
@@ -228,6 +238,7 @@ public class Market extends Thread {
     public static void main(String[] args) {
         Market m = Market.getMarket();
         m.addBuyRequest(new BuySell(StockType.AMAZON.toString().toLowerCase(), 1, "sur", 100, 100, true));
+        m.addSellRequest(new BuySell(StockType.AMAZON.toString().toLowerCase(), 1, "sur", 100, 100, false));
 //        m.addSellRequest(new BuySell(StockType.AMAZON.toString(),1,"sun",100, 100, false));
 //        m.matchOrders();
 //        m.updateStockValues();

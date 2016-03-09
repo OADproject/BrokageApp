@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -127,6 +128,29 @@
                               <Button layoutX="277.0" layoutY="407.0" mnemonicParsing="false" text="Start Market" />
                               <Button layoutX="378.0" layoutY="407.0" mnemonicParsing="false" text="Stop Market" />
                            </children></Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Graph View">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="542.0" prefWidth="806.0">
+                           <children>
+                              <LineChart layoutX="279.0" layoutY="25.0" style="-fx-background-color: #000; -fx-border-color: #FF0000; -fx-horizontal-grid-lines-visible: #0000FF; -fx-legend-visible: #00FF00;">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <ChoiceBox layoutX="129.0" layoutY="25.0" prefWidth="150.0" />
+                              <Label layoutX="44.0" layoutY="29.0" text="Choose Stock: " />
+                              <Button layoutX="129.0" layoutY="63.0" mnemonicParsing="false" text="Display Graph" />
+                           </children>
+                        </Pane>
                      </children>
                   </AnchorPane>
                </content>
