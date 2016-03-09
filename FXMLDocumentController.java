@@ -83,6 +83,7 @@ public class FXMLDocumentController implements Initializable {
         Market m = Market.getMarket();
         System.out.println("marketStarted");
         updateMarket(new ActionEvent());
+        
 
     }
 
