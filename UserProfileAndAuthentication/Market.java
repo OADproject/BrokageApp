@@ -232,11 +232,14 @@ public class Market extends Thread {
     }
 
     private void updatePortfolio(BuySell b, BuySell s) {
-        User ub = allUsersTable.get(b.getUserId());
-        ub.getPortfolio().updatePortfolio(b);
-
-        User sb = allUsersTable.get(s.getUserId());
-        sb.getPortfolio().updatePortfolio(s);
+        for (Integer id: allUsersTable.keySet() ){
+            User u = allUsersTable.get(id);
+            if(u.getName().equals(b.getUserName())) {
+                u.getPortfolio().updatePortfolio(b);
+            } else if(u.getName().equals(s.getUserName())){
+                u.getPortfolio().updatePortfolio(s);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -306,6 +309,16 @@ public class Market extends Thread {
         }
         sb.append(",balance:" + user.getPortfolio().getMoneyBalance());
         return sb.toString();
+    }
+
+    public List<BuySell> createBuySellRequsets(String input){
+        String[] reqs = input.split(";");
+        List<BuySell> buySells = new ArrayList<>();
+        for (String s: reqs
+             ) {
+            buySells.add(createBuySell(s));
+        }
+    return  buySells;
     }
 
     public HashMap<String, String> parse(String input) {
