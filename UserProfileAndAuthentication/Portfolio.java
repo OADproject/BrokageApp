@@ -1,7 +1,9 @@
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Portfolio {
     private double moneyBalance;
@@ -58,7 +60,7 @@ public class Portfolio {
     }
 
     public boolean updatePortfolio(BuySell order) {
-      
+
         if (order.isBuy()) {
             setMoneyBalance(getMoneyBalance() - (order.getQuantity() * order.getUnitPrice()));
             for (Stock s : stocks) {
@@ -82,5 +84,14 @@ public class Portfolio {
 
         return true;
     }
+
+    public int getTotalStockQuantity(){
+        int c = 0;
+        for (Stock s: stocks) {
+            c += s.getStockQty();
+        }
+        return  c;
+    }
+
 
 }

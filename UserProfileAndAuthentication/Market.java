@@ -171,7 +171,7 @@ public class Market extends Thread {
             double newStockVal = calculateNewVal(currentStockValues.get(s), buySellDiff);
             currentStockValues.put(s, newStockVal);
             if (s.equals("amazon")){
-                System.out.println("Global Stocks: "+ s + " " + newStockVal);
+//                System.out.println("Global Stocks: "+ s + " " + newStockVal);
             }
 
         }
@@ -266,5 +266,55 @@ public class Market extends Thread {
         User nu = new User(" "," "," "," ",p,authentication);
 
         return nu;
+    }
+
+
+
+
+    public BuySell createBuySell(String request) {
+        Map<String, String> m = parse(request);
+        // stockName:amazon,userId:3,userName:surag,
+        BuySell b = new BuySell(m.get("stockName"), Integer.parseInt(m.get("userId")), m.get("userName"),
+                Double.parseDouble(m.get("unitPrice")), Integer.parseInt(m.get("quantity")),
+                m.get("buySell").toLowerCase().equals("true") ? true : false);
+
+        return b;
+
+    }
+
+    public String parseStringCurrentStockValues(){
+        Market m =  Market.getMarket();
+        StringBuilder sb = new StringBuilder();
+        Map<String,Double> vals =  m.getCurrentStockValues();
+        for (String s: vals.keySet()
+                ) {
+            sb.append(s);
+            sb.append(" : ");
+            sb.append(vals.get(s));
+            sb.append(",");
+        }
+       return  sb.toString();
+    }
+
+
+    public String getUserStringView(User user){
+        StringBuilder sb = new StringBuilder();
+        sb.append(parseStringCurrentStockValues());
+        List<Stock> s = user.getPortfolio().getStocks();
+        for (Stock x:s) {
+            sb.append(","+x.getStockName()+"qty:"+x.getStockQty());
+        }
+        sb.append(",balance:" + user.getPortfolio().getMoneyBalance());
+        return sb.toString();
+    }
+
+    public HashMap<String, String> parse(String input) {
+        String[] s = input.split(",");
+        HashMap<String, String> m = new HashMap<>();
+        for (String x : s) {
+            String[] z = x.split(":");
+            m.put(z[0], z[1]);
+        }
+        return m;
     }
 }
